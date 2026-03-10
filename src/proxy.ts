@@ -31,6 +31,10 @@ export async function proxy(request: NextRequest) {
         return NextResponse.redirect(new URL("/auth/login", request.url))
     }
 
+    if (user && request.nextUrl.pathname.startsWith('/auth')) {
+  return NextResponse.redirect(new URL('/dashboard', request.url))
+    }
+
     return supabaseResponse
 }
 
