@@ -21,7 +21,7 @@ CREATE TABLE loans (
 );
 
 -- Assets
- CREATE TABLE assets (
+CREATE TABLE assets (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   name TEXT,
@@ -33,7 +33,19 @@ CREATE TABLE loans (
  );
 
 -- Investments
- CREATE TABLE investments (
+CREATE TABLE investments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  market TEXT NOT NULL CHECK (market IN ('NEPSE', 'NSE', 'NYSE', 'other')),
+  company_name TEXT,
+  shares_count NUMERIC,
+  buy_price NUMERIC NOT NULL,
+  buy_date DATE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Transactions 
+CREATE TABLE transactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   category_id UUID REFERENCES categories(id) ON DELETE SET NULL,
@@ -47,4 +59,5 @@ CREATE TABLE loans (
   investment_id UUID REFERENCES investments(id) ON DELETE SET NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
  );
+
 
