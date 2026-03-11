@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/client';
@@ -26,6 +27,9 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
   },);
 
+   // State to handle error messages from authentication
+  const [authError, setAuthError] = useState<string | null>(null);
+
   const router = useRouter();
 
   // Check if the user is already authenticated and redirect to dashboard
@@ -44,7 +48,7 @@ export default function SignupPage() {
     });
 
     if (error) {
-      console.log(error.message);
+      setAuthError(error.message);
       return;
     }
 
@@ -123,10 +127,21 @@ export default function SignupPage() {
             )}
           </div>
 
+          {authError && (
+            <p className="text-red-500 text-sm mt-1">{authError}</p>
+          )}
+
           <Button type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting ? 'Signing Up...' : 'Sign Up'}
           </Button>
         </form>
+
+        <p className='text-center text-sm mt-4'>
+          Already have an account?{' '}
+          <a href="/auth/login" className="text-blue-500 hover:underline">
+            Login
+          </a>
+        </p>
       </div>
     </div>
   );

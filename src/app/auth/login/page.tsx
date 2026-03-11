@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { createClient } from '@/lib/supabase/client';
 import { loginSchema } from '@/lib/validations/auth';
@@ -13,6 +14,7 @@ import { loginSchema } from '@/lib/validations/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -25,6 +27,9 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
+  // State to handle error messages from authentication
+  const [authError, setAuthError] = useState<string | null>(null);
+
   const router = useRouter();
 
   async function onSubmit(data: LoginFormData) {
@@ -36,7 +41,7 @@ export default function Login() {
     });
 
     if (error) {
-      console.log(error.message);
+      setAuthError(error.message);
       return;
     }
 
@@ -78,9 +83,20 @@ export default function Login() {
             )}
           </div>
 
+          {authError && (
+            <p className="text-red-500 text-sm mt-1">{authError}</p>
+          )}
+
           <Button type="submit" disabled={isSubmitting} className="w-full">
             {isSubmitting ? 'Logging in...' : 'Login'}
           </Button>
+
+          <p className='text-center text-sm mt-4'>
+            Don&apos;t have an account?{' '}
+            <a href="/auth/signup" className="text-blue-500 hover:underline">
+              Sign Up
+            </a>
+          </p>
         </form>
       </div>
     </div>
