@@ -36,7 +36,7 @@ export default function SignupPage() {
   async function onSubmit(data: SignupFormData) {
     const supabase = createClient();
 
-    const { error } = await supabase.auth.signUp({
+    const { data: authData, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
@@ -50,6 +50,43 @@ export default function SignupPage() {
     if (error) {
       setAuthError(error.message);
       return;
+    }
+
+    // Insert default categories for the new user (hardcoded for simplicity, ideally should be dynamic or handled in a backend function)
+    if (authData.user) {
+      const { error: categoriesError } = await supabase
+      .from('categories')
+      .insert([
+        { user_id: authData.user.id, name: 'Salary', icon: '💼', type: 'income' },
+        { user_id: authData.user.id, name: 'Freelance', icon: '💻', type: 'income' },
+        { user_id: authData.user.id, name: 'Investment Returns', icon: '📈', type: 'income' },
+        { user_id: authData.user.id, name: 'Gift', icon: '🎁', type: 'income' },
+        { user_id: authData.user.id, name: 'Other Income', icon: '🔄', type: 'income' },
+        { user_id: authData.user.id, name: 'Food & Dining', icon: '🍔', type: 'expense' },
+        { user_id: authData.user.id, name: 'Housing & Rent', icon: '🏠', type: 'expense' },
+        { user_id: authData.user.id, name: 'Transport', icon: '🚗', type: 'expense' },
+        { user_id: authData.user.id, name: 'Health', icon: '💊', type: 'expense' },
+        { user_id: authData.user.id, name: 'Shopping', icon: '🛍️', type: 'expense' },
+        { user_id: authData.user.id, name: 'Subscriptions', icon: '📱', type: 'expense' },
+        { user_id: authData.user.id, name: 'Entertainment', icon: '🎬', type: 'expense' },
+        { user_id: authData.user.id, name: 'Education', icon: '📚', type: 'expense' },
+        { user_id: authData.user.id, name: 'Utilities', icon: '💡', type: 'expense' },
+        { user_id: authData.user.id, name: 'Other Expense', icon: '🔄', type: 'expense' },
+        { user_id: authData.user.id, name: 'Stocks', icon: '📊', type: 'investment' },
+        { user_id: authData.user.id, name: 'Savings', icon: '🏦', type: 'investment' },
+        { user_id: authData.user.id, name: 'Crypto', icon: '🪙', type: 'investment' },
+        { user_id: authData.user.id, name: 'Borrowed', icon: '🏦', type: 'liability' },
+        { user_id: authData.user.id, name: 'Payment', icon: '💳', type: 'liability' },
+        { user_id: authData.user.id, name: 'Property', icon: '🏠', type: 'asset' },
+        { user_id: authData.user.id, name: 'Vehicle', icon: '🚗', type: 'asset' },
+        { user_id: authData.user.id, name: 'Electronics', icon: '💻', type: 'asset' },
+        { user_id: authData.user.id, name: 'Cash & Bank', icon: '💰', type: 'asset' },
+        { user_id: authData.user.id, name: 'Other Asset', icon: '🪙', type: 'asset' },
+      ])
+
+      if (categoriesError) {
+        console.error('Error inserting default categories:', categoriesError);
+      }
     }
 
     router.push('/dashboard');

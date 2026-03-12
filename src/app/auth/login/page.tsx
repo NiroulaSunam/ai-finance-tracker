@@ -91,13 +91,15 @@ export default function Login() {
             {isSubmitting ? 'Logging in...' : 'Login'}
           </Button>
 
-          <p className='text-center text-sm mt-4'>
+        </form>
+
+        <p className='text-center text-sm mt-4'>
             Don&apos;t have an account?{' '}
             <a href="/auth/signup" className="text-blue-500 hover:underline">
               Sign Up
             </a>
-          </p>
-        </form>
+        </p>
+
       </div>
     </div>
   );

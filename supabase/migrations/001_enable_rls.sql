@@ -26,18 +26,18 @@ CREATE POLICY "Allow users to update their own categories" ON categories
 CREATE POLICY "Allow users to delete their own categories" ON categories
   FOR DELETE USING (user_id = auth.uid());  
 
--- loans
-ALTER TABLE loans ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Allow users to view their own loans" ON loans    
+-- liabilities
+ALTER TABLE liabilities ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow users to view their own liabilities" ON liabilities    
   FOR SELECT USING (user_id = auth.uid());      
 
-CREATE POLICY "Allow users to insert their own loans" ON loans
+CREATE POLICY "Allow users to insert their own liabilities" ON liabilities
   FOR INSERT WITH CHECK (user_id = auth.uid()); 
 
-CREATE POLICY "Allow users to update their own loans" ON loans
+CREATE POLICY "Allow users to update their own liabilities" ON liabilities
   FOR UPDATE USING (user_id = auth.uid()) WITH CHECK (user_id = auth.uid());    
 
-CREATE POLICY "Allow users to delete their own loans" ON loans
+CREATE POLICY "Allow users to delete their own liabilities" ON liabilities
   FOR DELETE USING (user_id = auth.uid());  
 
 -- assets
