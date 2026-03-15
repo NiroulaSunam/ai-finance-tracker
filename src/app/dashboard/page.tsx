@@ -1,4 +1,5 @@
 import SummaryCards from '@/components/summaryCards';
+import Charts from '@/components/charts';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function Dashboard() {
@@ -29,8 +30,9 @@ export default async function Dashboard() {
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
             <p>Welcome to your dashboard! {user?.user_metadata.firstname} Here you can manage your finances and track your expenses.</p>
-            
+
             <SummaryCards income={income} expenses={expenses} balance={balance} />
+            <Charts transactions={monthlyTransactions ?? []} />
         </div>
     );
 }
