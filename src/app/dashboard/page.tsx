@@ -1,3 +1,4 @@
+import SummaryCards from '@/components/summaryCards';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function Dashboard() {
@@ -8,7 +9,7 @@ export default async function Dashboard() {
     const now = new Date();
     const firstOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    const { data: montlyTransactions } = await supabase
+    const { data: monthlyTransactions } = await supabase
         .from('transactions')
         .select('*')
         .gte('date', firstOfMonth.toISOString()) //gte = greater than or equal to
@@ -28,6 +29,8 @@ export default async function Dashboard() {
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
             <p>Welcome to your dashboard! {user?.user_metadata.firstname} Here you can manage your finances and track your expenses.</p>
+            
+            <SummaryCards income={income} expenses={expenses} balance={balance} />
         </div>
     );
 }
