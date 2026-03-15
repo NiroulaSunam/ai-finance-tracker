@@ -98,9 +98,7 @@ export default function TransactionForm({ categories } :{
                     <option value="">Select a type</option>
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
-                    <option value="investment">Investment</option>
-                    <option value="liability">Liability</option>
-                    <option value="asset">Asset</option>
+                
                 </select>
                 {errors.type && <p className="text-red-500">{errors.type.message}</p>}
             </div>

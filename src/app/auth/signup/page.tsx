@@ -62,6 +62,7 @@ export default function SignupPage() {
         { user_id: authData.user.id, name: 'Investment Returns', icon: '📈', type: 'income' },
         { user_id: authData.user.id, name: 'Gift', icon: '🎁', type: 'income' },
         { user_id: authData.user.id, name: 'Other Income', icon: '🔄', type: 'income' },
+
         { user_id: authData.user.id, name: 'Food & Dining', icon: '🍔', type: 'expense' },
         { user_id: authData.user.id, name: 'Housing & Rent', icon: '🏠', type: 'expense' },
         { user_id: authData.user.id, name: 'Transport', icon: '🚗', type: 'expense' },
@@ -71,17 +72,11 @@ export default function SignupPage() {
         { user_id: authData.user.id, name: 'Entertainment', icon: '🎬', type: 'expense' },
         { user_id: authData.user.id, name: 'Education', icon: '📚', type: 'expense' },
         { user_id: authData.user.id, name: 'Utilities', icon: '💡', type: 'expense' },
+        { user_id: authData.user.id, name: 'Loan Payment', icon: '💳', type: 'expense' },
+        { user_id: authData.user.id, name: 'Asset Purchase', icon: '🏦', type: 'expense' },
+        { user_id: authData.user.id, name: 'Investment', icon: '📊', type: 'expense' },
         { user_id: authData.user.id, name: 'Other Expense', icon: '🔄', type: 'expense' },
-        { user_id: authData.user.id, name: 'Stocks', icon: '📊', type: 'investment' },
-        { user_id: authData.user.id, name: 'Savings', icon: '🏦', type: 'investment' },
-        { user_id: authData.user.id, name: 'Crypto', icon: '🪙', type: 'investment' },
-        { user_id: authData.user.id, name: 'Borrowed', icon: '🏦', type: 'liability' },
-        { user_id: authData.user.id, name: 'Payment', icon: '💳', type: 'liability' },
-        { user_id: authData.user.id, name: 'Property', icon: '🏠', type: 'asset' },
-        { user_id: authData.user.id, name: 'Vehicle', icon: '🚗', type: 'asset' },
-        { user_id: authData.user.id, name: 'Electronics', icon: '💻', type: 'asset' },
-        { user_id: authData.user.id, name: 'Cash & Bank', icon: '💰', type: 'asset' },
-        { user_id: authData.user.id, name: 'Other Asset', icon: '🪙', type: 'asset' },
+     
       ])
 
       if (categoriesError) {
