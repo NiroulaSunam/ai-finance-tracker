@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// import logout button from components
+import LogoutButton from "./logoutButton";
+
 export default function Sidebar() {
   const pathname = usePathname();
   
@@ -11,7 +14,7 @@ export default function Sidebar() {
     { name: "Transactions", href: "dashboard/transactions" },
     { name: "Assets", href: "dashboard/assets" },
     { name: "Investments", href: "dashboard/investments" },
-    { name: "Settings", href: "dashboard/settings" },
+    { name: "Liabilities", href: "dashboard/liabilities" },
   ];
 
   return (
@@ -30,6 +33,9 @@ export default function Sidebar() {
           </Link>
         ))}
       </nav>
+      <div className="mt-auto">
+        <LogoutButton />
+      </div>
     </div>
   );
 }
