@@ -11,10 +11,10 @@ export default function Sidebar() {
   
   const navItems = [
     { name: "Dashboard", href: "/dashboard" },
-    { name: "Transactions", href: "dashboard/transactions" },
-    { name: "Assets", href: "dashboard/assets" },
-    { name: "Investments", href: "dashboard/investments" },
-    { name: "Liabilities", href: "dashboard/liabilities" },
+    { name: "Transactions", href: "/dashboard/transactions" },
+    { name: "Assets", href: "/dashboard/assets" },
+    { name: "Investments", href: "/dashboard/investments" },
+    { name: "Liabilities", href: "/dashboard/liabilities" },
   ];
 
   return (
